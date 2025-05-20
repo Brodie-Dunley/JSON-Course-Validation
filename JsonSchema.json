@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "Code": {
+      "type": "string",
+      "pattern": "^[A-Z]{4}-[0-9]{4}$"
+    },
+    "Evaluations": {
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string"
+        },
+        "Weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "OutOf": {
+          "type": "integer"
+        },
+        "EarnedMarks": {
+          "type": "number"
+        }
+      },
+      "required": [ "Description", "Weight", "OutOf", "EarnedMarks" ] 
+    }
+  },
+  "required": [ "Code", "Evaluations" ] 
+}
