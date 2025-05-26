@@ -19,3 +19,25 @@ C:\Users\bdunl\Desktop\Summer 2025\INFO 3138 Declarative Languages\Week 2\InClas
 C:\Users\bdunl\Desktop\Summer 2025\INFO 3138 Declarative Languages\Week 2\InClass\JSONCourseProgram\JSONCourseProgram\obj\Debug\net8.0\JSONCourseProgram.csproj.AssemblyReference.cache
 C:\Users\bdunl\Desktop\Summer 2025\INFO 3138 Declarative Languages\Week 2\InClass\JSONCourseProgram\JSONCourseProgram\obj\Debug\net8.0\JSONCour.C1E15D98.Up2Date
 C:\Users\bdunl\Desktop\Summer 2025\INFO 3138 Declarative Languages\Week 2\InClass\JSONCourseProgram\JSONCourseProgram\bin\Debug\net8.0\Newtonsoft.Json.Schema.dll
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\bin\Debug\net8.0\JSONCourseProgram.exe
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\bin\Debug\net8.0\JSONCourseProgram.deps.json
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\bin\Debug\net8.0\JSONCourseProgram.runtimeconfig.json
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\bin\Debug\net8.0\JSONCourseProgram.dll
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\bin\Debug\net8.0\JSONCourseProgram.pdb
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\bin\Debug\net8.0\Namotion.Reflection.dll
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\bin\Debug\net8.0\Newtonsoft.Json.Schema.dll
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\bin\Debug\net8.0\NJsonSchema.dll
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\bin\Debug\net8.0\NJsonSchema.Annotations.dll
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\obj\Debug\net8.0\JSONCourseProgram.csproj.AssemblyReference.cache
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\obj\Debug\net8.0\JSONCourseProgram.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\obj\Debug\net8.0\JSONCourseProgram.AssemblyInfoInputs.cache
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\obj\Debug\net8.0\JSONCourseProgram.AssemblyInfo.cs
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\obj\Debug\net8.0\JSONCourseProgram.csproj.CoreCompileInputs.cache
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\obj\Debug\net8.0\JSONCourseProgram.sourcelink.json
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\obj\Debug\net8.0\JSONCour.C1E15D98.Up2Date
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\obj\Debug\net8.0\JSONCourseProgram.dll
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\obj\Debug\net8.0\refint\JSONCourseProgram.dll
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\obj\Debug\net8.0\JSONCourseProgram.pdb
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\obj\Debug\net8.0\JSONCourseProgram.genruntimeconfig.cache
+C:\Users\bdunl\Desktop\Git\JSON-Course-Validation\JSONCourseProgram\JSONCourseProgram\obj\Debug\net8.0\ref\JSONCourseProgram.dll
