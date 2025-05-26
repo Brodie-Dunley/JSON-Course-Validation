@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("JSONCourseProgram")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1140be861992e68439f3fbbdbd888586d64ce698")]
 [assembly: System.Reflection.AssemblyProductAttribute("JSONCourseProgram")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JSONCourseProgram")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

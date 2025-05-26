@@ -17,16 +17,16 @@ namespace JSONCourseProgram
 
     internal class Program
     {
-        
+
         //JSON file to take input from or output to
         private const string jsonFile = "grades.json";
 
         private const string jsonSchema = "JsonSchema.json";
         static void Main(string[] args)
         {
-            
 
-            List<Course> courses = new();
+
+            List<Course>? courses = new();
 
             bool newFile;
             if (File.Exists(jsonFile))
@@ -37,7 +37,7 @@ namespace JSONCourseProgram
                     courses = System.Text.Json.JsonSerializer.Deserialize<List<Course>>(jsonString);
                     Console.WriteLine("Loaded courses from file.");
 
-               
+
                 }
                 catch (Exception ex)
                 {
@@ -62,27 +62,27 @@ namespace JSONCourseProgram
                     Console.WriteLine("No new file will be created, exiting...");
                     Environment.Exit(0);
                 }
-                    
+
             }
 
-            string userInput = ""; 
+            string userInput = "";
             string jsonSchemaString = File.ReadAllText(jsonSchema);
             do
             {
                 Console.Clear();
-                displayInformation(courses);
+                displayInformation(courses!);
                 userInput = DisplayMenu();
 
                 if (int.TryParse(userInput, out int number))
                 {//Call the edit function
                     int userInputNum = int.Parse(userInput) - 1;
-                    EditCourseMenu(courses, userInputNum, jsonSchemaString);
+                    EditCourseMenu(courses!, userInputNum, jsonSchemaString);
                 }
                 else if (userInput == "A" || userInput == "a")
                 {
                     //Add new Course
-                   
-                    AddNewCourse(courses, jsonSchemaString);
+
+                    AddNewCourse(courses!, jsonSchemaString);
                 }
                 else if (userInput == "X" || userInput == "x")
                 {
@@ -92,13 +92,13 @@ namespace JSONCourseProgram
                 else
                 {
                     Console.WriteLine("Invalid Input. Please Try Again");
-                    
+
                 }
 
             } while (userInput.ToUpper() != "X");
 
             //Call the method to write to the JSON file
-            WriteJSONToFile(courses, jsonFile);
+            WriteJSONToFile(courses!, jsonFile);
         }
 
         //A Method to write all the Course objects back to the JSON File
@@ -130,17 +130,17 @@ namespace JSONCourseProgram
             Console.WriteLine("{0,-5}{1,-20}{2,-20}{3,-10}{4,-10}", "#.", "Course", "Marks Earned", "Out Of", "Percent");
             Console.WriteLine();
 
-            for (var i = 0; i < course.Count; i++) 
+            for (var i = 0; i < course.Count; i++)
             {
-                Console.WriteLine("{0,-5}{1,-20}{2,-20}{3,-10}{4,-10}", (i + 1), course[i].Code, course[i].TotalMarks, course[i].MaxMarks, course[i].GradePercentage);
-                Console.WriteLine() ;
+                Console.WriteLine("{0,-5}{1,-20}{2,-20:F2}{3,-10:F2}{4,-10:F2}", (i + 1), course[i].Code, course[i].TotalMarks, course[i].MaxMarks, course[i].GradePercentage);
+                Console.WriteLine();
             }
         }
 
         //Method to display the menu
         static string DisplayMenu()
         {
-            
+
             Console.WriteLine("Press a # from the above list to view/edit.delete a specific course.");
             Console.WriteLine("Press A to add a new course.");
             Console.WriteLine("Press X to quit.");
@@ -172,7 +172,7 @@ namespace JSONCourseProgram
                 Console.WriteLine(new String(' ', leftPadding) + currentCourse);
                 Console.WriteLine(new string('-', Console.WindowWidth - 1));
 
-                
+
                 if (course.Evaluations.Count == 0)
                 {
                     Console.WriteLine("There are current no evaluation for " + chosenCourse[Index].Code);
@@ -180,22 +180,22 @@ namespace JSONCourseProgram
                 }
                 else
                 {
-                    
-                    Console.WriteLine("{0,-5}{1,-20}{2,-20}{3,-10}{4,-17}{5,-10}", "#.", "Evaluation", "Marks Earned", "Out Of", "Course Marks", "Weight/100");
+
+                    Console.WriteLine("{0,-5}{1,-20}{2,-20}{3,-10}{4,-10}{5,-17}{6,-10}", "#.", "Evaluation", "Marks Earned", "Out Of", "Percent", "Course Marks", "Weight/100");
 
                     Console.WriteLine();
 
                     for (var i = 0; i < course.Evaluations.Count; i++)
                     {
-                       
-                        Console.WriteLine("{0,-5}{1,-20}{2,-20}{3,-10}{4,-17}{5,-10}", (i + 1), course.Evaluations[i].Description, course.Evaluations[i].EarnedMarks, course.Evaluations[i].OutOf, course.Evaluations[i].GetCourseMarks(), course.Evaluations[i].Weight);
-                        Console.WriteLine() ;
+
+                        Console.WriteLine("{0,-5}{1,-20}{2,-20:F2}{3,-10:F2}{4,-10:F2}{5,-17:F2}{6,-10:F2}", (i + 1), course.Evaluations[i].Description, course.Evaluations[i].EarnedMarks, course.Evaluations[i].OutOf, course.Evaluations[i].EvalPercentage(), course.Evaluations[i].GetCourseMarks(), course.Evaluations[i].Weight);
+                        Console.WriteLine();
                     }
                     Console.WriteLine(new string('-', Console.WindowWidth - 1));
                 }
 
-                
-                //---------------------------------------------------------------------End of Output Formatting-----------------------------------------------------------------------------------------------
+
+                //----------------------------------End of Output Formatting-------------------------------------------------------------------------------
 
                 //Menu Option output
                 Console.WriteLine("Press D to delete this course");
@@ -224,14 +224,26 @@ namespace JSONCourseProgram
                     {
                         Evaluation evaluation = new Evaluation();
                         Console.WriteLine("Enter a description: ");
-                        evaluation.Description = Console.ReadLine();
+                        evaluation.Description = Console.ReadLine() ?? "";
                         Console.WriteLine("Enter the 'out of' mark: ");
-                        evaluation.OutOf = double.Parse(Console.ReadLine());
-                        Console.WriteLine("Enter the % weight: ");
-                        evaluation.Weight = double.Parse(Console.ReadLine());
+                        try
+                        {
+                            //Try catch block 
+                            evaluation.OutOf = double.Parse(Console.ReadLine() ?? "");
+                            Console.WriteLine("Enter the % weight: ");
+                            //Try catch block
+                            evaluation.Weight = double.Parse(Console.ReadLine() ?? "");
+                        }
+                        catch (FormatException e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.WriteLine("Please Re-enter valid information");
+                            continue;
+                        }
+
 
                         Console.WriteLine("Enter marks earned or press ENTER to skip: ");
-                        string userInput = Console.ReadLine();
+                        string userInput = Console.ReadLine() ?? "";
                         double doubleInput = 0.0;
 
                         //Ensuring the input is a double before assigning it to the value. Then adding it to the Earned Marks attribute
@@ -265,7 +277,7 @@ namespace JSONCourseProgram
                             course.Evaluations.RemoveAt(addedEvalIndex);
                         }
                     } while (continueEval);
-                    
+
 
                 }
                 //Else if delete option
@@ -273,7 +285,7 @@ namespace JSONCourseProgram
                 {
                     Console.WriteLine("Delete " + course.Code + "? (y/n):");
 
-                    string deleteChoice = Console.ReadLine();
+                    string deleteChoice = Console.ReadLine() ?? "";
                     if (deleteChoice.ToUpper() == "Y")
                     {
                         chosenCourse.RemoveAt(Index);
@@ -284,7 +296,7 @@ namespace JSONCourseProgram
                         Console.WriteLine("Won't delete course");
 
                 }
-                else if(userChoice.ToUpper() == "X")
+                else if (userChoice.ToUpper() == "X")
                 {
                     Console.WriteLine("Returning to main menu");
                     continueMenu = false;
@@ -293,7 +305,7 @@ namespace JSONCourseProgram
                 {
                     Console.WriteLine("Invalid choice, please try again");
                 }
-            } while(continueMenu);
+            } while (continueMenu);
         }
 
         //Method to check the JSON is valid 
@@ -307,10 +319,11 @@ namespace JSONCourseProgram
 
 
         //Method to take in an evaluation perform 1 of 2 things. Either delete the evaluation or edit it. If neither of these two things, exit. 
-        public static void EditEvaluation(List<Evaluation> eval, int index, string json_Schema) {
+        public static void EditEvaluation(List<Evaluation> eval, int index, string json_Schema)
+        {
 
             bool continueEditMenu = true;
-           
+
             do
             {  //Header of the output
                 Console.Clear();
@@ -320,10 +333,10 @@ namespace JSONCourseProgram
                 Console.WriteLine(new string('-', Console.WindowWidth - 1));
 
                 //Display the contents of the current evaluation
-               
+
                 Console.WriteLine("{0,-15}{1,-8}{2,-8}{3,-15}{4,-10}", "Marks Earned", "Out of", "Percent", "CourseMarks", "Weight/100");
-               
-                Console.WriteLine("{0,-15}{1,-8}{2,-8}{3,-15}{4,-10}", eval[index].EarnedMarks, eval[index].OutOf, eval[index].EvalPercentage(), eval[index].GetCourseMarks(), eval[index].Weight);
+
+                Console.WriteLine("{0,-15:F2}{1,-8:F2}{2,-8:F2}{3,-15:F2}{4,-10:F2}", eval[index].EarnedMarks, eval[index].OutOf, eval[index].EvalPercentage(), eval[index].GetCourseMarks(), eval[index].Weight);
                 Console.WriteLine(new string('-', Console.WindowWidth - 1));
 
                 //Display options
@@ -333,7 +346,7 @@ namespace JSONCourseProgram
                 Console.WriteLine(new string('-', Console.WindowWidth - 1));
 
                 Console.WriteLine("Enter a command: ");
-                string userInput = Console.ReadLine().ToUpper();
+                string userInput = Console.ReadLine() ?? "".ToUpper();
                 switch (userInput)
                 {
                     case "D":
@@ -341,9 +354,9 @@ namespace JSONCourseProgram
                         do
                         {
                             Console.WriteLine("Do you want to delete this evaluation? (Y/N)");
-                            string deleteChoice = Console.ReadLine().ToUpper();
-                        
-                        
+                            string deleteChoice = Console.ReadLine() ?? "".ToUpper();
+
+
                             if (deleteChoice == "Y")
                             {
                                 eval.RemoveAt(index);
@@ -359,16 +372,16 @@ namespace JSONCourseProgram
                                 Console.WriteLine("Not a valid choice, please try again");
                             }
                         } while (continueLoop);
-                      break;
+                        break;
                     case "E":
                         bool continueLoopE = true;
                         do
                         {
                             Console.WriteLine("Enter marks earned out of " + eval[index].OutOf + ", press Enter to leave unassigned: ");
-                            string userMarksInput = Console.ReadLine();
+                            string userMarksInput = Console.ReadLine() ?? "";
                             if (string.IsNullOrWhiteSpace(userMarksInput))
                                 continueLoopE = false;
-                            else if(!string.IsNullOrEmpty(userMarksInput))
+                            else if (!string.IsNullOrEmpty(userMarksInput))
                             {
                                 if (int.TryParse(userMarksInput, out int parsedValue))
                                 {
@@ -377,7 +390,7 @@ namespace JSONCourseProgram
                                     string jsonToCheck = JsonConvert.SerializeObject(eval[index]);
                                     IList<string> messages;
 
-                                    if(ValidateCourseData(jsonToCheck, json_Schema, out messages) == true)
+                                    if (ValidateCourseData(jsonToCheck, json_Schema, out messages) == true)
                                     {
                                         Console.WriteLine("Evaluation edited sucessfully.");
                                         continueLoopE = false;
@@ -386,11 +399,11 @@ namespace JSONCourseProgram
                                     {
                                         Console.WriteLine($"\nERROR:\tInvalid Marks Earned Entered. Please enter a value >= 0 AND <= {eval[index].OutOf}\n");
                                     }
-                                  
+
                                 }
                             }
                         } while (continueLoopE);
-                            break;
+                        break;
                     case "X":
                         continueEditMenu = false;
                         break;
@@ -400,30 +413,32 @@ namespace JSONCourseProgram
         }
 
         //Method to add a new Course
-        public static void AddNewCourse(List<Course>coursesList, string jsonSchema)
+        public static void AddNewCourse(List<Course> coursesList, string jsonSchema)
         {
             bool continueInput = true;
             do
             {
+
                 Console.WriteLine("Enter a Course Code: ");
-                string newCourseCode = Console.ReadLine();
+                string newCourseCode = Console.ReadLine() ?? "";
 
                 Course newCourse = new Course { Code = newCourseCode };
                 string jsonToCheck = JsonConvert.SerializeObject(newCourse);
                 IList<string> messages;
 
 
-                if(ValidateCourseData(jsonToCheck, jsonSchema, out messages) == true){
+                if (ValidateCourseData(jsonToCheck, jsonSchema, out messages) == true)
+                {
                     coursesList.Add(newCourse);
                     continueInput = false;
                 }
                 else
                 {
                     Console.WriteLine($"\nERROR:\tInvalid Course Code.\n");
-                   
+
                 }
             } while (continueInput);
-            
+
 
         }
 
@@ -455,5 +470,5 @@ namespace JSONCourseProgram
         }
     }
 
-  
+
 }
